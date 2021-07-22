@@ -33,6 +33,7 @@ nameserver="8.8.8.8"
 # Output file contents with data
 cat <<EOF
 version: 2
+renderer: networkd
 ethernets:
 EOF
 
@@ -43,8 +44,7 @@ for i in $(jq "$interfaces_path | keys | .[]" $metadata_file); do
 
   # ensure this is bond0 before adding to the ifaces list for now
   if [[ "${bond}" == "${bond_name}" ]]; then
-    iface_name=e$i
-    # iface_name=$(jq -r "$interfaces_path[$i].name" $metadata_file)
+    iface_name=$(jq -r "$interfaces_path[$i].name" $metadata_file)
     macaddress=$(jq -r "$interfaces_path[$i].mac" $metadata_file)
 
     # first one should be the primary interface, which is used in active-backup mode
