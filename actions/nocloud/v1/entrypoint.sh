@@ -23,10 +23,6 @@ curl --fail "${METADATA_URL:?}/metadata" > "${METADATA_FILE}"
 
 # write out remaining configdrive format files based on metadata
 
-# "${MOUNTPOINT}/meta-data"
-# "${MOUNTPOINT}/vendor-data"
-# "${MOUNTPOINT}/network-config"
-
 /scripts/meta-data.sh "${METADATA_FILE}" > "${MOUNTPOINT}/meta-data"
 /scripts/vendor-data.sh "${METADATA_FILE}" > "${MOUNTPOINT}/vendor-data"
 /scripts/network-config.sh "${METADATA_FILE}" > "${MOUNTPOINT}/network-config"
